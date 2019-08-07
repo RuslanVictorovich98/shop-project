@@ -13,13 +13,9 @@
   padding: 10px 5% 10px 5%;
 
 }
-.App-title-length {
-  float: right;
-  margin-top: -30px;
-}
 
 .App-container {
-margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .App-content{
@@ -49,6 +45,10 @@ margin-bottom: 30px;
 .content strong {
   color: black;
   background: white;
+}
+
+.content img {
+  width: 50px;
 }
 
 .content-loading {
