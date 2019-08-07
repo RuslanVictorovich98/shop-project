@@ -24,6 +24,10 @@ margin-bottom: 30px;
 
 .App-content{
   height: 500px;
+  display: block;
+  overflow-y: scroll;
+
+  
 }
 
 .content {
@@ -50,6 +54,14 @@ margin-bottom: 30px;
 .content-loading {
   text-align: center;
   margin-top: 100px;
+}
+
+.button-loading {
+  width: 20%; 
+  margin-top: 100px;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
 }
 
 div::-webkit-scrollbar {

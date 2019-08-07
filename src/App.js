@@ -42,8 +42,6 @@ class App extends React.Component {
 
   elementList () {
     if (this.state.data) {
-      // return this.state.items.products.map((elem, i) =>    {
-
       return this.state.products.map((elem, i) =>    {
         return (
           <div key={i} className="content">
@@ -53,14 +51,11 @@ class App extends React.Component {
             <span ><strong>Цена: </strong>{elem.price} </span> <br/>
             <span ><strong>Звезд: </strong>{elem.stars} </span> <br/>
           </div>
-  
         );
       });
     } else if (this.state.loading){
         return(<div className="content-loading">loading...</div>)
-    } else {return<div className="content-button"> <button className="btn btn-success" onClick={this.gettingProducts}>Get data!</button></div>}
-
-    
+    } else {return<div className="content-button"> <button className="btn btn-success button-loading" onClick={this.gettingProducts}>Get data!</button></div>}
   }
 
   render () {
