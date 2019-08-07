@@ -12,6 +12,20 @@ class App extends React.Component {
     filter: false
   }
 
+
+  gettingProducts = async () => {
+      // const msg = await (await fetch('https://jsonplaceholder.typicode.com/todos/1'));
+      this.setState({loading: true})
+      const msg = await (await fetch('https://demo8421975.mockable.io/products'));
+        if(msg.ok === true && msg.status === 200) {
+          let x = await (await fetch('https://demo8421975.mockable.io/products')).json();
+          
+          setTimeout(() => {
+            this.setState({items: [x], products: x.products, data: true, loading: false});
+          }, 1000);
+    }
+  };
+
   filterData = () => {
     if (this.state.data){
       let x = document.getElementById("input-filter").value;
@@ -28,24 +42,11 @@ class App extends React.Component {
     }
   };
 
-  gettingProducts = async () => {
-      // const msg = await (await fetch('https://jsonplaceholder.typicode.com/todos/1'));
-      this.setState({loading: true})
-      const msg = await (await fetch('https://demo8421975.mockable.io/products'));
-        if(msg.ok === true && msg.status === 200) {
-          let x = await (await fetch('https://demo8421975.mockable.io/products')).json();
-          
-          setTimeout(() => {
-            this.setState({items: [x], products: x.products, data: true, loading: false});
-          }, 1000);
-    }
-  };
-
   filterList () {
     if (this.state.data) {
       return(
         <div>
-          <input className="input-filter form-control" id="input-filter" type="text" placeholder="Показать товары цена которых ниже за...." onChange={this.filterData}/>
+          <input className="input-filter form-control" type="number" id="input-filter" placeholder="Цена от...." onChange={this.filterData}/>
       </div>
       );
     }
