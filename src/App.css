@@ -1,33 +1,63 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+* {
+  margin: 0;
+  padding: 0;
+  background: #1D1D1D;
   color: white;
 }
+/* header */
+.App-header {
+  /* background: #232323; */
+  /* color: white; */
+  margin-bottom: 2%;
+  box-shadow:  0 0 20px black;
+  padding: 10px 5% 10px 5%;
 
-.App-link {
-  color: #61dafb;
+}
+.App-title-length {
+  float: right;
+  margin-top: -30px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-container {
+margin-bottom: 30px;
+}
+
+.App-content{
+  height: 500px;
+}
+
+.content {
+  border: 1px solid silver;
+  margin: 5%;
+  padding: 10px;
+  border-radius: 3px;
+  color: black;
+  background: white;
+  margin-top: 1%;
+
+}
+
+.content span {
+  color: black;
+  background: white;
+
+}
+.content strong {
+  color: black;
+  background: white;
+}
+
+.content-loading {
+  text-align: center;
+  margin-top: 100px;
+}
+
+div::-webkit-scrollbar {
+width: 8px;  /* remove scrollbar space */
+background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+div::-webkit-scrollbar-thumb {
+background: white;
+border-radius: 20px;
 }
