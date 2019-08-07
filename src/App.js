@@ -1,26 +1,33 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  state = {
+    test: {},
+  }
+
+  gettingProducts = async () => {
+      const msg = await (await fetch('https://jsonplaceholder.typicode.com/todos/1'));
+      console.log(msg);
+      
+        if(msg.ok === true && msg.status === 200) {
+          let x = await (await fetch('https://jsonplaceholder.typicode.com/todos/1')).json();
+          this.setState({test: x})
+          console.log(this.state.test)    
+          alert("Hello")
+    }
+  }
+
+  render () {
+      return (
+          <div>
+            <button onClick={this.gettingProducts}>Ok!</button>
+          </div>
+      )
+  }
+
+
 }
 
 export default App;
