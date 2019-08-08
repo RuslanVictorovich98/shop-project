@@ -73,3 +73,16 @@ div::-webkit-scrollbar-thumb {
 background: white;
 border-radius: 20px;
 }
+
+.input-filter {
+  margin-top: 4%;
+}
+
+/* AppCategoryFilter */
+
+.left-panel {
+  /* border-right: 1px solid rebeccapurple; */
+  /* height: 500px; */
+  /* padding-top: 100px; */
+  /* border: 1px solid red; */
+}

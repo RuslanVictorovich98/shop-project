@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 
+
 class App extends React.Component {
 
   state = {
@@ -29,15 +30,19 @@ class App extends React.Component {
   filterData = () => {
     if (this.state.data){
       let x = document.getElementById("input-filter").value;
-      let j = this.state.products;
 
       if (x !=='') {
-        let filterMin = this.state.products.filter(num => num.price > x)
-        console.log(j);
+        let filterMin = this.state.products.filter(num => num.price >= x)
+        // console.log(j);
         this.setState({productsFilter: filterMin, filter: true})
-    } else  {
+      } else  {
         this.setState({filter: false})
       }
+
+      // if (x !=='') {
+      //   let filterName = this.state.products.find(num => num.brand.toLowerCase() == x.toLowerCase());
+      //   console.log(filterName);
+      // }
 
     }
   };
@@ -61,6 +66,8 @@ class App extends React.Component {
               <img src={elem.img}/><br/>
               <span><strong>№: </strong>{i+1} </span><br/>
               <span ><strong>Имя: </strong>{elem.name} </span> <br/>
+              <span ><strong>Бренд: </strong>{elem.brand} </span> <br/>
+
               <span ><strong>Цена: </strong>{elem.price} </span> <br/>
               <span ><strong>Звезд: </strong>{elem.stars} </span> <br/>
             </div>
@@ -73,6 +80,8 @@ class App extends React.Component {
               <img src={elem.img}/><br/>
               <span><strong>№: </strong>{i+1} </span><br/>
               <span ><strong>Имя: </strong>{elem.name} </span> <br/>
+              <span ><strong>Бренд: </strong>{elem.brand} </span> <br/>
+
               <span ><strong>Цена: </strong>{elem.price} </span> <br/>
               <span ><strong>Звезд: </strong>{elem.stars} </span> <br/>
             </div>
