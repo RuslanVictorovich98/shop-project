@@ -1,117 +1,174 @@
 import React from 'react';
 import './App.css';
-
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Navigator from './Navigator';
 
 class App extends React.Component {
 
-  state = {
-    items: [],
-    products: [],
-    productsFilter: [],
-    data: false,
-    loading: false,
-    filter: false
-  }
-
-
-  gettingProducts = async () => {
-      // const msg = await (await fetch('https://jsonplaceholder.typicode.com/todos/1'));
-      this.setState({loading: true})
-      const msg = await (await fetch('https://demo8421975.mockable.io/products'));
-        if(msg.ok === true && msg.status === 200) {
-          let x = await (await fetch('https://demo8421975.mockable.io/products')).json();
-          
-          setTimeout(() => {
-            this.setState({items: [x], products: x.products, data: true, loading: false});
-          }, 1000);
-    }
-  };
-
-  filterData = () => {
-    if (this.state.data){
-      let x = document.getElementById("input-filter").value;
-
-      if (x !=='') {
-        let filterMin = this.state.products.filter(num => num.price >= x)
-        // console.log(j);
-        this.setState({productsFilter: filterMin, filter: true})
-      } else  {
-        this.setState({filter: false})
+    state = {
+        items: [],
+        products: [],
+        productsFilter: [],
+        data: false,
+        loading: false,
+        filter: false,
+        currentCategory: 'one'
       }
 
-      // if (x !=='') {
-      //   let filterName = this.state.products.find(num => num.brand.toLowerCase() == x.toLowerCase());
-      //   console.log(filterName);
-      // }
-
+    
+    
+    gettingProductsCategory() {
+        console.log(this.state.currentCategory);
+        if (this.state.currentCategory !=='') {
+          let filterName = this.state.products.filter(num => num.bsr_category.toLowerCase() === this.state.currentCategory.toLowerCase());
+            console.log(filterName);
+          this.setState({productsFilter: filterName, filter: true})
+          } else  {
+            this.setState({filter: false})
+          }
+  
     }
-  };
-
-  filterList () {
-    if (this.state.data) {
-      return(
-        <div>
-          <input className="input-filter form-control" type="number" id="input-filter" placeholder="Цена от...." onChange={this.filterData}/>
-      </div>
-      );
-    }
-  };
-
-  elementList () {
-    if (this.state.data) {
-      if (this.state.filter) {
-        return this.state.productsFilter.map((elem, i) =>    {
-          return (
-            <div key={i} className="content">
-              <img src={elem.img}/><br/>
-              <span><strong>№: </strong>{i+1} </span><br/>
-              <span ><strong>Имя: </strong>{elem.name} </span> <br/>
-              <span ><strong>Бренд: </strong>{elem.brand} </span> <br/>
-
-              <span ><strong>Цена: </strong>{elem.price} </span> <br/>
-              <span ><strong>Звезд: </strong>{elem.stars} </span> <br/>
-            </div>
-          );
-        });
-      } else {
-        return this.state.products.map((elem, i) =>    {
-          return (
-            <div key={i} className="content">
-              <img src={elem.img}/><br/>
-              <span><strong>№: </strong>{i+1} </span><br/>
-              <span ><strong>Имя: </strong>{elem.name} </span> <br/>
-              <span ><strong>Бренд: </strong>{elem.brand} </span> <br/>
-
-              <span ><strong>Цена: </strong>{elem.price} </span> <br/>
-              <span ><strong>Звезд: </strong>{elem.stars} </span> <br/>
-            </div>
-          );
-        });
-      }
       
+    gettingProducts = async () => {
+        this.setState({loading: true})
+        const msg = await (await fetch('https://demo8421975.mockable.io/products'));
+            if(msg.ok === true && msg.status === 200) {
+            let x = await (await fetch('https://demo8421975.mockable.io/products')).json();
+            
+            setTimeout(() => {
+                this.setState({items: [x], products: x.products, data: true, loading: false});
+            }, 1000);
+        }   
+    };
 
-    } else if (this.state.loading){
-        return(<div className="content-loading">loading...</div>)
-    } else {return<div className="content-button"> <button className="btn btn-success button-loading" onClick={this.gettingProducts}>Get data!</button></div>}
-  }
+    filterData = () => {
+        if (this.state.data){
+          let x = document.getElementById("input-filter").value;
+          if (x !=='') {
+            let filterMin = this.state.products.filter(num => num.price >= x)
+            this.setState({productsFilter: filterMin, filter: true})
+          } else  {
+            this.setState({filter: false})
+          }
+        }
+      };
 
-  render () {
-      return (
-          <div>
-            <header className="App-header">
-              <div className='row'>
-                <h3 className="App-title col-md-3 col-xs-3 col-sm-3 col-lg-3">ProductsAPI</h3>
-                {this.filterList()}
-                </div>
-            </header>
-            <div className="App-content">
-              {this.elementList()}
+
+    retCategory () {
+        let x =  this.state.products.map((elem) => {
+            return elem.bsr_category;
+        })
+        let y = x.filter((item, pos) => {
+            return x.indexOf(item) === pos;
+            })
+        
+        const categoryClickHandler = (e) => {
+          console.log('it works!');
+            let a = e.currentTarget.innerText;
+            this.setState(() => ({
+                currentCategory: a
+            }), () => {this.gettingProductsCategory()})
+        }
+       
+        // return y.map((elem, i) => {
+        //     return (
+        //         <ul>
+        //             <li key={i} id="category-list" onClick={categoryClickHandler}>{elem}</li>
+        //         </ul>
+        //     )
+        // })
+        return (<Navigator categoryClickHandler={categoryClickHandler} name={y}></Navigator>)
+    }
+
+// RENDER
+    filterList () {
+        if (this.state.data) {
+          return(
+            <div>
+              <input className="input-filter form-control" type="number" id="input-filter" placeholder="Цена от...." onChange={this.filterData}/>
             </div>
-          </div>
-      )
-  }
+          );
+        }
+      };        
 
+    listData () {
+        if (this.state.filter) {
+            return this.state.productsFilter.map((elem, i) =>    {
+              return (
+                <div key={i} className="content">
+                  <img src={elem.img}/><br/>
+                  <span><strong>№: </strong>{i+1} </span><br/>
+                  <span ><strong>Имя: </strong>{elem.name} </span> <br/>
+                  <span ><strong>Бренд: </strong>{elem.brand} </span> <br/>
+                  <span ><strong>Категория: </strong>{elem.bsr_category} </span> <br/>
+                  <span ><strong>Цена: </strong>{elem.price} </span> <br/>
+                  <span ><strong>Звезд: </strong>{elem.stars} </span> <br/>
+                </div>
+              );
+            });
+          } else {
+            return this.state.products.map((elem, i) =>    {
+              return (
+                <div key={i} className="content">
+                  <img src={elem.img}/><br/>
+                  <span><strong>№: </strong>{i+1} </span><br/>
+                  <span ><strong>Имя: </strong>{elem.name} </span> <br/>
+                  <span ><strong>Бренд: </strong>{elem.brand} </span> <br/>
+                  <span ><strong>Категория: </strong>{elem.bsr_category} </span> <br/>
+                  <span ><strong>Цена: </strong>{elem.price} </span> <br/>
+                  <span ><strong>Звезд: </strong>{elem.stars} </span> <br/>
+                </div>
+              );
+            });
+          }
+    }
+  
+    elementList () {
+        if (this.state.data) {
+            return (
+                <Row>
+                    <Col lg="2" sm="4">
+                        {this.retCategory()}
+                    </Col>
+                    <Col lg="10" sm="8">
+                        <div className="App-content">
+                            {this.listData()}
+                        </div>
+                    </Col>
+                </Row>
+            );
+        } else if (this.state.loading){
+            return(<div className="content-loading">loading...</div>)
+        } else {return<div className="content-button"> <button className="btn btn-success button-loading" onClick={this.gettingProducts}>Get data!</button></div>}
+      }
 
+    render () {
+        return(
+            <div>
+                <header className="App-header">
+                    <Container>
+                        <Row>
+                            <Col lg="4" sm="4">
+                                <h3 className="App-title">ProductsAPI</h3>
+                            </Col>
+                            <Col lg="4" sm="4">
+                                {this.filterList()}
+
+                            </Col>
+                        </Row>
+                        
+                    </Container>
+                </header>
+                <Container>
+                    {this.elementList()}
+                </Container>
+
+                
+            </div>
+        )
+    }
 }
 
 export default App;
