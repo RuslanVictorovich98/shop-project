@@ -38,8 +38,9 @@ class App extends React.Component {
     
     gettingProductsCategory() {
         console.log(this.state.currentCategory);
-        
-        if (this.state.currentCategory !=='') {
+        if (this.state.currentCategory === 'All category') {
+          this.setState({productsFilter: this.state.products})
+        } else if (this.state.currentCategory !=='') {
           let filterName = this.state.products.filter(num => num.bsr_category.toLowerCase() === this.state.currentCategory.toLowerCase());
             console.log(filterName);
           this.setState({productsFilter: filterName, filter: true})

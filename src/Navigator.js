@@ -28,9 +28,11 @@ class Navigator extends React.Component {
     }
 
     render() {
+        const { categoryClickHandler} = this.props;
         return(
           <Router history={history}>
                 <ul >
+                    <li onClick={categoryClickHandler}><a>All category</a></li>
                     {this.functRender()}
                 </ul>
                 {/* <button onClick={this.getHistory}>Get history</button> */}
