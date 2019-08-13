@@ -2,7 +2,7 @@ import React from 'react';
 import { Router, Route, Link } from "react-router-dom";
 import {createBrowserHistory} from 'history';
 import {connect} from 'react-redux';
-import {category, create, gettingProducts} from './listActions';
+import {category, create, gettingProducts} from './listActionsCreator';
 
 
 const history = createBrowserHistory();

@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navigator from './listNavigator';
-import {findToName, create} from './listActions';
+import {findToName, create} from './listActionsCreator';
 
 import {createBrowserHistory} from 'history';
 
@@ -164,7 +164,7 @@ class App extends React.Component {
             return (
                 <Row>
                     <Col lg="2" sm="4">
-                        <Navigator activeFilterFunct={this.activeFilterFunct} data={this.props.main} gettingProducts={this.gettingProducts} findResult={this.state.findResult}/>
+                        <Navigator activeFilterFunct={this.activeFilterFunct} findResult={this.state.findResult}/>
                     </Col>
                     <Col lg="10" sm="8">
                         <div className="App-content">
