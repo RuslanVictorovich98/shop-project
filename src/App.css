@@ -79,6 +79,15 @@ border-radius: 20px;
 }
 
 /* AppCategoryFilter */
+.category-list{
+  text-align: center;
+  padding: 1px;
+  border-radius: 3px;
+}
+
+.category-list:hover {
+  background: white;
+}
 
 .left-panel {
   /* border-right: 1px solid rebeccapurple; */

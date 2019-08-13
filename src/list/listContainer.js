@@ -55,9 +55,6 @@ class App extends React.Component {
               if (num.name.toLowerCase().indexOf(x.slice(2).toLowerCase()) >= 0) {
                 return num;
               }})
-
-              console.log(filterName);
-              
               this.setState({vievToFilterList: true}, () => this.props.findToName(filterMin));
             } else {
               this.setState({vievToFilterList: true}, () => this.props.findToName(filterName));
@@ -78,19 +75,16 @@ class App extends React.Component {
       if (this.state.data){
         let x = document.getElementById("input-filter").value;
         if (x !=='') {
-              
 
           if (this.state.filter === false) {
-
             let filterMin = this.props.main.filter(num => {
               if (num.name.toLowerCase().indexOf(x) >= 0) {
                   return num;
                 }})
-
             this.setState({vievToFilterList: true, findResult: x}, () => this.props.findToName(filterMin))
           }  else {
-
               let filterMin = this.props.list.filter(num => {
+
               if (num.name.toLowerCase().indexOf(x) >= 0) {
                   return num;
                 }})
@@ -201,8 +195,6 @@ class App extends React.Component {
                 <Container>
                     {this.elementList()}
                 </Container>
-
-                
             </div>
         )
     }

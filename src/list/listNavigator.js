@@ -16,8 +16,6 @@ class Navigator extends React.Component {
         let categoryData = data.filter((item, pos) => {
             return data.indexOf(item) === pos;
             })
-        // console.log(history.location.search.slice(2));
-        
 
         if (true) {
             history.push({search: '?=' + this.props.findResult});
@@ -25,12 +23,12 @@ class Navigator extends React.Component {
 
         return categoryData.map((elem, i) => {
             return(
-                <li key={i} onClick={(e) => {
+                <h4 className="category-list" key={i} onClick={(e) => {
                     this.props.category(e.currentTarget.innerText);
                     this.props.activeFilterFunct();
                 }}>
                     <Link to={elem}>{elem}</Link>
-                </li>);
+                </h4>);
         })
     }
   
@@ -40,13 +38,9 @@ class Navigator extends React.Component {
     render() {
         return(
           <Router history={history}>
-                <ul >
-                    {/* <li onClick={(e) => {this.props.allCategory(e.currentTarget.innerText)}}><Link to={'All category'}>All category</Link></li> */}
-                    <li onClick={ () => this.props.gettingProducts(this.props.main)}><Link to={'All category'}>All category</Link></li>
-                    {this.retCategory()}
-                    <button onClick={this.getHistory}>getHistory</button>
-                </ul>
-                <hr/>
+                {/* <li onClick={(e) => {this.props.allCategory(e.currentTarget.innerText)}}><Link to={'All category'}>All category</Link></li> */}
+                <h4  className="category-list" onClick={ () => this.props.gettingProducts(this.props.main)}><Link to={'All category'}>All category</Link></h4>
+                {this.retCategory()}
           </Router>
         )
     }
@@ -56,8 +50,6 @@ const mapStateToProps = (state) => {
     return {
         list: state.list,
         main: state.main,
-        // filter: state.filter
-
     }
 }
 
