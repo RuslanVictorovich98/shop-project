@@ -1,11 +1,12 @@
 import {combineReducers} from 'redux';
-import {listReducer, mainList} from '../list/listReducers';
+import {listReducer, mainList, liftFilter} from '../lists/listReducers';
 
 
 
 const allReducers = combineReducers ({
     list: listReducer,
     main: mainList,
+    listFilter: liftFilter
 });
 
 export default allReducers;

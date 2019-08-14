@@ -4,6 +4,7 @@ import {FIND_TO_NAME, EDIT_CATEGORY, CREATE_LIST, GETTING_PRODUCTS} from './list
 const list =  {
     products: [],
     productsFilter: [],
+    productsFind: []
 };
 
 export function mainList (state = list.products, action) {
@@ -17,8 +18,23 @@ export function mainList (state = list.products, action) {
     }
 }
 
+export function liftFilter  (state = list.productsFind, action) {
+    switch (action.type) {
+
+        case FIND_TO_NAME: 
+            return action.payload;
+
+        default:
+            return state;
+    }
+}
+
 export function listReducer (state = list.productsFilter, action) {
     switch (action.type){
+
+        case CREATE_LIST:
+            list.productsFilter = action.payload;
+            return action.payload;
 
         case GETTING_PRODUCTS: 
             return action.payload;
@@ -27,8 +43,7 @@ export function listReducer (state = list.productsFilter, action) {
         case EDIT_CATEGORY:
             return list.productsFilter.filter(num => num.bsr_category.toLowerCase() === action.payload.toLowerCase());
 
-        case FIND_TO_NAME: 
-            return action.payload;
+       
 
         default:
             return state;

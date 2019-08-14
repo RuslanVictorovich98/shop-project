@@ -5,9 +5,8 @@ import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import './index.css';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
-// import App from './App';
-// import App from './AppCategoryFilter';
-import App from './list/listContainer';
+import App from './common/App';
+// import App from './list/listContainer';
 
 import allReducers from './common/indexReducer';
 

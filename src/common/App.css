@@ -27,28 +27,32 @@
 }
 
 .content {
-  border: 1px solid silver;
+  /* border: 1px solid silver; */
   margin: 5%;
   padding: 10px;
   border-radius: 3px;
-  color: black;
-  background: white;
+  /* color: black; */
+  background: #232323;
   margin-top: 1%;
 
 }
 
 .content span {
-  color: black;
-  background: white;
+  background: #232323;
+
+  /* color: white; */
 
 }
 .content strong {
-  color: black;
-  background: white;
+  background: #232323;
+
+  /* background: white; */
 }
 
 .content img {
-  width: 50px;
+  width: 150px;
+  padding: 3px;
+  border-radius: 3px;
 }
 
 .content-loading {
