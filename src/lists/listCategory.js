@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Router, Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 import {create, category, gettingProducts} from './listActionsCreator';
 import {createBrowserHistory} from 'history';
 
@@ -49,6 +50,15 @@ class ListCategory extends React.Component {
             </Router>)
         }
     }
+
+ListCategory.propTypes = {
+    main: PropTypes.array,
+    list: PropTypes.array,
+    findData: PropTypes.string,
+    create: PropTypes.func,
+    category: PropTypes.func,
+    gettingProducts: PropTypes.func
+}
 
 const mapStateToProps = (state) => {
     return {

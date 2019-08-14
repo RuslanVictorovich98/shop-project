@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -21,6 +22,10 @@ class Header extends React.Component {
             </header>
         )
     }
+}
+
+Header.propTypes = {
+    findByName: PropTypes.func
 }
 
 export default Header;

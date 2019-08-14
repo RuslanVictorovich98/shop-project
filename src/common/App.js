@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import {create, findToName} from '../lists/listActionsCreator';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -61,6 +62,13 @@ class App extends React.Component {
         )
     }
 }
+
+App.propTypes = {
+    main: PropTypes.array,
+    list: PropTypes.array
+
+}
+
 const mapStateToProps = (state) => {
     return {
         main: state.main,

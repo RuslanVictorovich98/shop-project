@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 class ListOneProduct extends React.Component {
 
@@ -45,16 +45,8 @@ class ListOneProduct extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        list: state.list,
-        main: state.main,
-    }
+ListOneProduct.propTypes = {
+    product: PropTypes.object
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-    }
-}
-
-export default connect (mapStateToProps, mapDispatchToProps) (ListOneProduct);
+export default ListOneProduct;
