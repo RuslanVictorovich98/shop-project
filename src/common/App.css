@@ -26,6 +26,7 @@
   
 }
 
+
 .content {
   /* border: 1px solid silver; */
   margin: 5%;
@@ -33,7 +34,18 @@
   border-radius: 3px;
   /* color: black; */
   background: #232323;
+  border: 1px solid #232323;
   margin-top: 1%;
+  display: flex;
+}
+
+.content:hover {
+  border: 1px ridge #3574B7;
+}
+
+.content-body {
+  background: #232323;
+  margin-left: 20px;
 
 }
 
@@ -43,16 +55,19 @@
   /* color: white; */
 
 }
-.content strong {
+.content-body strong {
   background: #232323;
-
-  /* background: white; */
+  color: #3477AD;
+}
+.content-img {
+  background: #232323;
 }
 
 .content img {
-  width: 150px;
+  height: 150px;
   padding: 3px;
   border-radius: 3px;
+  /* border-radius: 3px; */
 }
 
 .content-loading {

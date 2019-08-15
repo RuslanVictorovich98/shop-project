@@ -1,4 +1,4 @@
-import {FIND_TO_NAME, EDIT_CATEGORY, CREATE_LIST, GETTING_PRODUCTS,} from './listActions';
+import {FIND_TO_NAME, EDIT_CATEGORY, CREATE_LIST, GETTING_PRODUCTS, FETCH_USERS_REQUEST, FIRTS_RENDER_PUTHNAME, FIND_TO_NAME_PATHNAME} from './listActions';
 
 export const create = (event) => {
     return {
@@ -25,5 +25,23 @@ export const gettingProducts = (event) => {
     return {
         type: GETTING_PRODUCTS,
         payload: event,
+    }
+}
+
+export const fetchUsersRequest = () => {
+    return {type: FETCH_USERS_REQUEST}
+}
+
+export const firstRenderPuthname = (event) => {
+    return {
+        type: FIRTS_RENDER_PUTHNAME,
+        payload: event
+    }
+}
+
+export const findToNamePathname = (event) => {
+    return {
+        type: FIND_TO_NAME_PATHNAME,
+        payload: event
     }
 }

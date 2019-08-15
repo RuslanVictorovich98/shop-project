@@ -1,16 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
-import {createStore} from 'redux';
+import {createStore,  applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import './index.css';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 import App from './common/App';
 // import App from './list/listContainer';
 
+import createSagaMiddleware from 'redux-saga'
+import GetProduct from './lists/listGetProducts';
 import allReducers from './common/indexReducer';
 
-export const store = createStore(allReducers);
+const sagaMiddleware = createSagaMiddleware();
+
+export const store = createStore(allReducers, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(GetProduct)
 
 
 ReactDOM.render(<Provider store={store}>
