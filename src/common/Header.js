@@ -15,7 +15,7 @@ class Header extends React.Component {
                             <h3 className="App-title">ProductsAPI</h3>
                         </Col>
                         <Col lg="6" sm="6">
-                        <input className="input-filter form-control" type="find" id="input-filter" placeholder="Введите имя...." onChange={this.props.findByName}/>
+                        <input className="input-filter form-control" type="search" id="input-filter" placeholder="Введите имя...." onChange={this.props.findByName}/>
                         </Col>
                     </Row>
                 </Container>

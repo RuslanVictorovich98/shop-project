@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { Router, Link } from "react-router-dom";
 import PropTypes from 'prop-types';
-import {create, category, gettingProducts} from './listActionsCreator';
+import {create, category, gettingProducts} from '../ducks/lists';
 import slugify from 'react-slugify';
 import {createBrowserHistory} from 'history';
 
@@ -64,8 +64,6 @@ class ListCategory extends React.Component {
         })
     }
   
-    
-
     render() {
         const returnOnClickAllCategory = () => {
             this.props.gettingProducts(this.props.main)

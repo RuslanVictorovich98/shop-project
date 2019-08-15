@@ -2,14 +2,14 @@ import React from 'react';
 import './App.css';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {create, findToName, fetchUsersRequest, firstRenderPuthname, findToNamePathname} from '../lists/listActionsCreator';
+import {create, findToName, fetchUsersRequest, firstRenderPuthname, findToNamePathname, saveFindToName} from './ducks/lists';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Header from './Header';
+import Header from './common/Header';
 
-import ListCategory from '../lists/listCategory';
-import ListProducts from '../lists/listProducts';
+import ListCategory from './lists/listCategory';
+import ListProducts from './lists/listProducts';
 
 class App extends React.Component {
 
@@ -24,14 +24,20 @@ class App extends React.Component {
 
     find = () => { 
         let find = document.getElementById("input-filter").value;
-        console.log(this.state.firstHistory);
+        // console.log(this.state.firstHistory);
 
         if (find !=='') {
                         
             let filterMin = this.props.list.filter(num => {
                 return num.name.toLowerCase().indexOf(find) >= 0 ? num : null;
             })
-            this.setState({find: true}, () => this.props.findToName(filterMin))
+            this.setState({find: true}, () => {
+                this.props.findToName(filterMin)
+                this.props.saveFindToName(find);
+
+            })
+           console.log(this.props.saveFindData);
+           
         } else {
             this.setState({find: false})
         }
@@ -81,6 +87,7 @@ const mapStateToProps = (state) => {
         main: state.main,
         list: state.list,
         firstProductsPuthname: state.firstProductsPuthname,
+        saveFindData: state.saveFindData
     }
 }
 
@@ -91,6 +98,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchUsersRequest: (i) => dispatch(fetchUsersRequest(i)),
         firstRenderPuthname: (i) => dispatch(firstRenderPuthname(i)),
         findToNamePathname: (i) => dispatch(findToNamePathname(i)),
+        saveFindToName: (i) => dispatch(saveFindToName(i)),
 
     }
 }

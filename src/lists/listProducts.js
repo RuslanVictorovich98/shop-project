@@ -45,7 +45,6 @@ class ListProducts extends React.Component {
             <div className="App-content">
               {this.returnProducts()}  
             </div>
-
         )
     }
 }

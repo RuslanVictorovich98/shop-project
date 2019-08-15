@@ -5,11 +5,10 @@ import {createStore,  applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import './index.css';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
-import App from './common/App';
-// import App from './list/listContainer';
+import App from './App';
 
 import createSagaMiddleware from 'redux-saga'
-import GetProduct from './lists/listGetProducts';
+import GetProduct from './ducks/lists';
 import allReducers from './common/indexReducer';
 
 const sagaMiddleware = createSagaMiddleware();
