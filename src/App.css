@@ -28,14 +28,30 @@ a:focus:hover {
   margin-bottom: 30px;
 }
 
+/* AppCategoryFilter */
+.left-panel-category {
+  background: #232323;
+  margin-top: 9px;
+  padding: 0px;
+}
+
+.category-list{
+  text-align: center;
+  padding: 1px;
+  background: #232323;
+  /*border-radius: 3px;*/
+}
+
+.category-list:hover {
+  background: white;
+}
+
+
 .App-content{
   height: 500px;
   display: block;
   overflow-y: scroll;
-
-  
 }
-
 
 .content {
   /* border: 1px solid silver; */
@@ -107,20 +123,3 @@ border-radius: 20px;
   margin-top: 4%;
 }
 
-/* AppCategoryFilter */
-.category-list{
-  text-align: center;
-  padding: 1px;
-  border-radius: 3px;
-}
-
-.category-list:hover {
-  background: white;
-}
-
-.left-panel {
-  /* border-right: 1px solid rebeccapurple; */
-  /* height: 500px; */
-  /* padding-top: 100px; */
-  /* border: 1px solid red; */
-}

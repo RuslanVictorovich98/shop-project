@@ -7,11 +7,20 @@ import {createBrowserHistory} from 'history';
 const history = createBrowserHistory();
 
 class ListProducts extends React.Component {
-    
     returnProducts = () => {
-        if (this.props.firstPathname === false) {
-            return <div className="content-loading">loading...</div>
-        } else if (this.props.firstPathname === 'No category') { 
+        const {firstPathname} = this.props;
+
+        if (firstPathname === 'Home & Kitchen' || firstPathname === 'Sports & Outdoors' || firstPathname === 'Health & Personal Care' || firstPathname === 'Baby Products') {
+            if (this.props.find === false) {
+                return this.props.firstProductsPuthname.map((product, i) => {
+                    return(<ListOneProduct key={i} product={product} />)
+                })
+            } else {
+                return this.props.firstProductsPuthnameFind.map((product, i) => {
+                    return <ListOneProduct key={i} product={product} />
+                })
+            }
+        } else if (firstPathname === 'All category' ) {
 
             if (this.props.find === false) { 
                 return this.props.list.map((product, i) => {
@@ -22,18 +31,7 @@ class ListProducts extends React.Component {
                     return <ListOneProduct key={i} product={product} />
                 })
             }
-        } else {
-
-            if (this.props.find === false) {
-                return this.props.firstProductsPuthname.map((product, i) => {
-                    return(<ListOneProduct key={i} product={product} />)
-                })
-            } else {
-                return this.props.firstProductsPuthnameFind.map((product, i) => {
-                    return <ListOneProduct key={i} product={product} />
-                })
-            }
-        }
+        } else return <div className="content-loading">loading...</div>
     }   
 
     componentDidMount () {

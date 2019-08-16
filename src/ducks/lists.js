@@ -133,6 +133,8 @@ export function firstProductsPuthname (state = list.productsPuthname, action) { 
     switch (action.type) {
         
         case FIRTS_RENDER_PUTHNAME:
+            console.log(action.payload);
+            
             return list.productsFilter.filter(num => num.bsr_category.toLowerCase() === action.payload.toLowerCase());
 
         default:

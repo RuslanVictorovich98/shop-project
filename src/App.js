@@ -3,6 +3,7 @@ import './App.css';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {create, findToName, fetchUsersRequest, firstRenderPuthname, findToNamePathname, saveFindToName} from './ducks/lists';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -24,8 +25,6 @@ class App extends React.Component {
 
     find = () => { 
         let find = document.getElementById("input-filter").value;
-        // console.log(this.state.firstHistory);
-
         if (find !=='') {
                         
             let filterMin = this.props.list.filter(num => {
@@ -42,7 +41,7 @@ class App extends React.Component {
             this.setState({find: false})
         }
 
-        if (this.state.firstPathname !== false && this.state.firstPathname !== 'No category') {
+        if (this.state.firstPathname !== false && this.state.firstPathname !== 'All category') {
 
             let filterMin = this.props.firstProductsPuthname.filter(num => {
                 return num.name.toLowerCase().indexOf(find) >= 0 ? num : null;
@@ -61,7 +60,7 @@ class App extends React.Component {
                 <Header findByName={this.find} />
                 <Container>
                     <Row>
-                        <Col lg="3" sm="4">
+                        <Col className='left-panel-category' lg="3" sm="4">
                             <ListCategory findData={this.state.findData} editFirtsPathname={this.editFirtsPathname}/>
                         </Col>
                         <Col lg="9" sm="8">

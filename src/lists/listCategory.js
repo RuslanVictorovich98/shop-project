@@ -30,9 +30,9 @@ class ListCategory extends React.Component {
 
                     
                 default:
-                    return this.props.editFirtsPathname('No category');
+                    return this.props.editFirtsPathname('All category');
             }
-        }
+        } else return this.props.editFirtsPathname('All category');
 
         }, 500)
     }
@@ -53,7 +53,7 @@ class ListCategory extends React.Component {
         
         const renderCategoryReturnOnClick = (e) => {
             this.props.category(e.currentTarget.innerText);
-            this.props.editFirtsPathname('No category');
+            this.props.editFirtsPathname('All category');
         }
 
         return categoryData.map((elem, i) => {
@@ -67,7 +67,7 @@ class ListCategory extends React.Component {
     render() {
         const returnOnClickAllCategory = () => {
             this.props.gettingProducts(this.props.main)
-            this.props.editFirtsPathname('No category');
+            this.props.editFirtsPathname('All category');
         }
 
         return(
