@@ -12,7 +12,7 @@ class ListCategory extends React.Component {
 
     renderCategory = () => {
         if (this.props.mainList.products === []) {
-            return <div>OKEYY</div>
+            return <div>loading...</div>
         } else {
 
             let data =  this.props.mainList.products.map((elem) => {
@@ -21,10 +21,13 @@ class ListCategory extends React.Component {
             let categoryData = data.filter((item, pos) => {
                 return data.indexOf(item) === pos;
             })
-            
+
             const renderCategoryReturnOnClick = (e) => {
                 this.props.category(e.currentTarget.innerText);
+                history.push({search: '?' + this.props.mainList.search});
             }
+
+            
             
             return categoryData.map((elem, i) => {
                 return(
@@ -35,11 +38,19 @@ class ListCategory extends React.Component {
         }
     }
 
+    clickByLink = (e) => {
+        this.props.category(e.currentTarget.innerText)
+        setTimeout(()=> {
+        history.push({search: '?' + this.props.mainList.search});
+        console.log(this.props.mainList.search);
+    }, 10)
+    }
+
     render() {
         return(
             <Router history={history}> 
                 <h4  className="category-list">
-                    <Link to={'/' + slugify('All category')} onClick={(e) => this.props.category(e.currentTarget.innerText)}>All category</Link>
+                    <Link to={'/' + slugify('All category')} onClick={this.clickByLink}>All category</Link>
                 </h4> 
                 {this.renderCategory()} 
             </Router>

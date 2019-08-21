@@ -36,15 +36,12 @@ class Header extends React.Component {
     }
 
     defaultValueByInput = () => {
-        if (history.location.search.slice(1) === undefined) {
-            return ''
-        } else {
+        if (history.location.search.slice(1) !== undefined) {
             return history.location.search.slice(1)
         }
     }
 
     render() {
-    
         return(
             <header className="App-header">
                 <Container>
