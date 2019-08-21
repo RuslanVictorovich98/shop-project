@@ -9,8 +9,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import {createBrowserHistory} from 'history';
-// import { get } from 'https';
-
 const history = createBrowserHistory();
 
 class Header extends React.Component {
@@ -57,7 +55,10 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-    search: PropTypes.func
+    search: PropTypes.func,
+    pathname: PropTypes.func,
+    mainList: PropTypes.object
+
 }
 
 const mapStateToProps = (state) => {
