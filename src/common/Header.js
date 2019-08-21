@@ -20,19 +20,14 @@ class Header extends React.Component {
         search(inputValue);
     }
 
-    getHistory = (findData) =>{
-        setTimeout(() => {
-            console.log(history.location);
-
-            this.props.pathname(history.location)
-            this.props.search(findData);
-        }, 500)
+    getHistory = () =>{
+        this.props.pathname(history.location)
+        // console.log(history.location);
+        // this.props.search(history.location.search.slice(1));
     }
 
     componentDidMount(){
-        let findData = history.location.search.slice(1)
-       
-        this.getHistory(findData)
+        this.getHistory()
     }
 
     defaultValueByInput = () => {
@@ -47,7 +42,7 @@ class Header extends React.Component {
                 <Container>
                     <Row>
                         <Col lg="4" sm="4">
-                            <h3 className="App-title">ProductsAPI</h3>
+                            <h3 className="App-title" onClick={() => {console.log(history.location)}}>ProductsAPI</h3>
                         </Col>
                         <Col lg="6" sm="6">
                         <input className="input-filter form-control" type="search" id="input-filter" placeholder="Введите имя...." defaultValue={this.defaultValueByInput()} onChange={(e) => {this.handleSubmit(e)}}/>

@@ -14,40 +14,31 @@ class ListCategory extends React.Component {
         if (this.props.mainList.products === []) {
             return <div>loading...</div>
         } else {
-
-            let data =  this.props.mainList.products.map((elem) => {
-                return elem.bsr_category;
-            })
-            let categoryData = data.filter((item, pos) => {
-                return data.indexOf(item) === pos;
-            })
+            let data =  this.props.mainList.products.map(elem => elem.bsr_category)
+            let categoryData = data.filter((item, pos) => data.indexOf(item) === pos)
 
             const renderCategoryReturnOnClick = (e) => {
                 this.props.category(e.currentTarget.innerText);
                 history.push({search: '?' + this.props.mainList.search});
             }
 
-            
-            
-            return categoryData.map((elem, i) => {
-                return(
-                    <h4 className="category-list" key={i}  onClick={renderCategoryReturnOnClick}>
-                        <Link to={slugify(elem)}>{elem}</Link>
-                    </h4>);
-            })
+            return categoryData.map((elem, i) => (
+                <h4 className="category-list" key={i}  onClick={renderCategoryReturnOnClick}>
+                    <Link to={slugify(elem)}>{elem}</Link>
+                </h4>)
+            )
         }
     }
 
     clickByLink = (e) => {
         this.props.category(e.currentTarget.innerText)
         setTimeout(()=> {
-        history.push({search: '?' + this.props.mainList.search});
-        console.log(this.props.mainList.search);
-    }, 10)
+            history.push({search: '?' + this.props.mainList.search});
+        }, 10)
     }
 
     render() {
-        return(
+        return (
             <Router history={history}> 
                 <h4  className="category-list">
                     <Link to={'/' + slugify('All category')} onClick={this.clickByLink}>All category</Link>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 class ListOneProduct extends React.Component {
 
-    returnProduct = () => {
+    render() {
         const product = this.props.product;
         return (
             <div className="content">
@@ -19,8 +19,6 @@ class ListOneProduct extends React.Component {
             </div>
         );
     }
-
-    render() {return(this.returnProduct())}
 }
 
 ListOneProduct.propTypes = {

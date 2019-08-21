@@ -9,7 +9,17 @@ import App from './App';
 
 import createSagaMiddleware from 'redux-saga'
 import GetProduct from './ducks/lists';
-import allReducers from './common/indexReducer';
+// import allReducers from './common/indexReducer';
+
+import {combineReducers} from 'redux';
+import {mainList} from './ducks/lists';
+
+
+const allReducers = combineReducers ({
+    mainList,
+});
+
+// export default allReducers;
 
 const sagaMiddleware = createSagaMiddleware();
 

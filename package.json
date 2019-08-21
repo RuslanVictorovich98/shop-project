@@ -40,6 +40,8 @@
     ]
   },
   "devDependencies": {
+    "enzyme": "^3.10.0",
+    "jest": "^24.7.1",
     "react-dev-utils": "^9.0.1"
   }
 }
