@@ -35,6 +35,14 @@ class Header extends React.Component {
         this.getHistory(findData)
     }
 
+    defaultValueByInput = () => {
+        if (history.location.search.slice(1) === undefined) {
+            return ''
+        } else {
+            return history.location.search.slice(1)
+        }
+    }
+
     render() {
     
         return(
@@ -45,7 +53,7 @@ class Header extends React.Component {
                             <h3 className="App-title">ProductsAPI</h3>
                         </Col>
                         <Col lg="6" sm="6">
-                        <input className="input-filter form-control" type="search" id="input-filter" placeholder="Введите имя...." defaultValue={history.location.search.slice(1)} onChange={(e) => {this.handleSubmit(e)}}/>
+                        <input className="input-filter form-control" type="search" id="input-filter" placeholder="Введите имя...." defaultValue={this.defaultValueByInput()} onChange={(e) => {this.handleSubmit(e)}}/>
                         </Col>
                     </Row>
                 </Container>
