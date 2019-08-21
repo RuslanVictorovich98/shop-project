@@ -7,83 +7,60 @@ import {createBrowserHistory} from 'history';
 const history = createBrowserHistory();
 
 class ListProducts extends React.Component {
-    returnProducts = () => {
-        const {firstPathname} = this.props;
 
-        if (firstPathname === 'Home & Kitchen' || firstPathname === 'Sports & Outdoors' || firstPathname === 'Health & Personal Care' || firstPathname === 'Baby Products') {
-            if (this.props.find === false) {
-                return this.props.firstProductsPuthname.map((product, i) => {
-                    return(<ListOneProduct key={i} product={product} />)
-                })
+    state = {
+        loading: true
+    }
+
+    returnProduct = () => {
+        const {mainList} = this.props;
+        setTimeout(() => {this.setState({loading: false})}, 500)
+        if (this.state.loading === true) {
+            return <div className="content-loading">loading...</div>
+        } else  {
+
+            let product = mainList.products;
+            // console.log(mainList.category);
+            
+            if (mainList.category === 'all category' || mainList.category === 'All category') {
+                product = mainList.products
             } else {
-                return this.props.firstProductsPuthnameFind.map((product, i) => {
-                    return <ListOneProduct key={i} product={product} />
-                })
+                product = product.filter(num => num.bsr_category.toLowerCase() === mainList.category.toLowerCase())
             }
-        } else if (firstPathname === 'All category' ) {
+            
+            // if (mainList.historySearch.slice(1) !== '') {
 
-            if (this.props.find === false) { 
-                return this.props.list.map((product, i) => {
-                    return (<ListOneProduct key={i} product={product} />)
-                })
-            } else {
-                return this.props.listFilter.map((product, i) => {
-                    return <ListOneProduct key={i} product={product} />
-                })
+            if (mainList.search !== '') {
+                product = product.filter(item => {
+                    return !item.name.toLowerCase().indexOf(mainList.search.toLowerCase());
+                });
+
             }
-        } else return <div className="content-loading">loading...</div>
-    }   
-
-    componentDidMount () {
-        this.setState({firstHistory: history.location.search.slice(1)}); // save search data in find
+            
+            return product.map((product, i) => {
+                return(<ListOneProduct key={i} product={product} />)
+            })
+        }
     }
 
     render() {
         return(
             <div className="App-content">
-              {this.returnProducts()}  
+                {/* <button onClick={() => console.log(this.props.mainList)}>Get State!</button> */}
+                {this.returnProduct()}
             </div>
         )
     }
 }
 
 ListProducts.propTypes = {
-    list: PropTypes.array,
-    listFilter: PropTypes.array,
-    find: PropTypes.bool
+    mainList: PropTypes.object,
 }
 
 const mapStateToProps = (state) => {
     return {
-        list: state.list,
-        listFilter: state.listFilter,
-        firstProductsPuthname: state.firstProductsPuthname,
-        firstProductsPuthnameFind: state.firstProductsPuthnameFind,
+        mainList: state.mainList,
     }
 }
 
 export default connect (mapStateToProps) (ListProducts);
-
-/*
-returnFirstLoadProductsFind = () => {
-
-        if (this.props.firstPathname === false) {
-            return <div className="content-loading">loading...</div>
-        } else if (this.props.firstPathname === 'No category') { 
-
-            let filterMin = this.props.list.filter(num => {
-                return num.name.toLowerCase().indexOf(this.state.firstHistory) >= 0 ? num : null;
-            })
-            return filterMin.map((product, i) => {
-                return <ListOneProduct key={i} product={product} />
-            })
-        } else {
-            let filterMin = this.props.firstProductsPuthname.filter(num => {
-                return num.name.toLowerCase().indexOf(this.state.firstHistory) >= 0 ? num : null;
-            })
-            return filterMin.map((product, i) => {
-                return <ListOneProduct key={i} product={product} />
-            })
-        }
-    }
-*/

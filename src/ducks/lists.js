@@ -1,18 +1,17 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 // ActionsType
-export const EDIT_LIST = 'EDIT_LIST';
-export const EDIT_CATEGORY = 'EDIT_CATEGORY';
-export const CREATE_LIST = 'CREATE_LIST';
-export const FIND_TO_NAME = 'FIND_TO_NAME';
-export const SAVE_FIND_DATA = 'SAVE_FIND_DATA';
-export const FILTER_LIST = 'FIND_TO_NAME';
-export const GETTING_PRODUCTS = 'GETTING_PRODUCTS' ;
 export const FETCH_USERS_REQUEST = 'FETCH_USERS_REQUEST';
-export const FIRTS_RENDER_PUTHNAME = 'FIRTS_RENDER_PUTHNAME';
-export const FIND_TO_NAME_PATHNAME = 'FIND_TO_NAME_PATHNAME';
+export const CREATE_LIST = 'CREATE_LIST';
+export const SET_CATEGORY = 'SET_CATEGORY';
+export const SEARCH_DATA = 'SEARCH_DATA';
+export const PATHNAME_DATA = 'PATHNAME_DATA';
 
 // ActionsCreator
+export const fetchUsersRequest = () => {
+    return {type: FETCH_USERS_REQUEST}
+}
+
 export const create = (event) => {
     return {
         type: CREATE_LIST,
@@ -22,46 +21,21 @@ export const create = (event) => {
 
 export const category = (event) => {
     return {
-        type: EDIT_CATEGORY,
-        payload: event,
-    }
-}
-
-export const saveFindToName = (event) => {
-    return {
-        type: SAVE_FIND_DATA,
+        type: SET_CATEGORY,
         payload: event
     }
 }
 
-export const findToName = (event) => {
+export const search = (event) => {
     return {
-        type: FIND_TO_NAME,
-        payload: event,
-    }
-}
-
-export const gettingProducts = (event) => {
-    return {
-        type: GETTING_PRODUCTS,
-        payload: event,
-    }
-}
-
-export const fetchUsersRequest = () => {
-    return {type: FETCH_USERS_REQUEST}
-}
-
-export const firstRenderPuthname = (event) => {
-    return {
-        type: FIRTS_RENDER_PUTHNAME,
+        type: SEARCH_DATA,
         payload: event
     }
 }
 
-export const findToNamePathname = (event) => {
+export const pathname = (event) => {
     return {
-        type: FIND_TO_NAME_PATHNAME,
+        type: PATHNAME_DATA, 
         payload: event
     }
 }
@@ -70,88 +44,44 @@ export const findToNamePathname = (event) => {
 const list =  {
     products: [],
     productsFilter: [],
-    productsFind: [],
-    productsPuthname: [],
-    productsPuthnameFind: [],
-    findData: ''
+    historySearch: '',
+    category: '',
+    search: ''
 };
 
-export function saveFindData (state = list.findData, action) {
-    switch (action.type) {
-        case SAVE_FIND_DATA:
-            // console.log(action.payload);
-
-            return action.payload;
-
-        default: 
-            return state;
-    }
-}
-
-export function mainList (state = list.products, action) { // main
-    switch (action.type) {
-        case CREATE_LIST:
-            list.productsFilter = action.payload;
-            return action.payload;
-
-        default:
-            return state;
-    }
-}
-
-export function listReducer (state = list.productsFilter, action) { // list data
+export function mainList (state = list, action){
     switch (action.type){
-
         case CREATE_LIST:
-            list.productsFilter = action.payload;
-            return action.payload;
+            return {...state,
+                products: action.payload,
+                productsFilter: action.payload,
+                category: 'All category'
+              };
 
-        case GETTING_PRODUCTS: 
-            return action.payload;
-            
+        case SET_CATEGORY:
+            return {
+                    ...state, 
+                    category: action.payload
+                };
 
-        case EDIT_CATEGORY:
-            return list.productsFilter.filter(num => num.bsr_category.toLowerCase() === action.payload.toLowerCase());
+        case SEARCH_DATA: 
+            return {
+                ...state,
+                search: action.payload
+            };
 
-        default:
-            return state;
-    }
-}
-
-export function liftFilter  (state = list.productsFind, action) { // list data after filter
-    switch (action.type) {
-
-        case FIND_TO_NAME: 
-            return action.payload;
-
-        default:
-            return state;
-    }
-}
-
-export function firstProductsPuthname (state = list.productsPuthname, action) { // data at first load page by category
-    switch (action.type) {
-        
-        case FIRTS_RENDER_PUTHNAME:
-            console.log(action.payload);
-            
-            return list.productsFilter.filter(num => num.bsr_category.toLowerCase() === action.payload.toLowerCase());
+        case PATHNAME_DATA:
+            let category = action.payload.pathname.slice(1).replace(/-/g," ");
+            return {
+                ...state,
+                historySearch: action.payload.search,
+                category: category,
+                search: action.payload.search,
+            };
 
         default:
             return state;
     }
-}
-
-export function firstProductsPuthnameFind (state = list.productsPuthnameFind, action) { // data at first load page by find
-    switch(action.type) {
-
-        case FIND_TO_NAME_PATHNAME: 
-            return action.payload;
-
-        default: 
-            return state;
-    }
-    
 }
 
 // Saga
@@ -172,3 +102,4 @@ export function* fetchUser() {
     yield takeLatest(FETCH_USERS_REQUEST, fetchUser);
   }
 
+ 
